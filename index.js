@@ -19,7 +19,22 @@ const dateFormat = 'iso' // iso | unix
     First get a list of in-season sports
         the sport 'key' from the response can be used to get odds in the next request
 
-*//*
+*/
+
+async function getSports() {
+    try {
+        const sports = await axios.get('https://api.the-odds-api.com/v4/sports', {
+            params: {
+                apiKey
+            }
+        })
+        console.log(sports.data)
+    } catch (error) {
+        console.log('Error status', error.response.status)
+        console.log(error.response.data)
+    }
+}
+
 axios.get('https://api.the-odds-api.com/v4/sports', {
     params: {
         apiKey
@@ -32,7 +47,7 @@ axios.get('https://api.the-odds-api.com/v4/sports', {
     console.log('Error status', error.response.status)
     console.log(error.response.data)
 })
-
+/*
     Now get a list of live & upcoming games for the sport you want, along with odds for different bookmakers
     This will deduct from the usage quota
     The usage quota cost = [number of markets specified] x [number of regions specified]
