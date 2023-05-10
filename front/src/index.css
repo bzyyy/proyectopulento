@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  background-color: #1E1E1E;
+}
+
+#root {
+  width: 960px;
+}

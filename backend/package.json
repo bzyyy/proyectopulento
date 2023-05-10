@@ -1,0 +1,35 @@
+{
+  "name": "proyectopulento",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir dist --copy-files",
+    "start": "npm run build && node dist/index.js",
+    "start:dev": "nodemon --exec babel-node src/index.js"
+  },
+  "author": "Francisco Cabezas",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^10.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
