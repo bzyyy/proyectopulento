@@ -4,4 +4,4 @@ Para este ejemplo utilizaremos TailwindCSS para prototipar. [TailwindCSS](https:
 
 ## Instalación
 
-Para ejecutar el proyecto, primero instala las dependencias con `npm install` y luego ejecuta `npm dev`.
+Para ejecutar el proyecto, primero instala las dependencias con `npm install` y luego ejecuta `npm run dev`.
