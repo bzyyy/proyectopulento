@@ -1,14 +1,14 @@
 import Router from 'koa-router'
 //import getHealth from './health/health'
-import { getSports, getTeamScoresLive } from './sports/sports'
+import { getGamesAllRouter,  getTeamsGamesRouter } from './games/Games'
 
 
 const router = new Router()
 
 //router.get('/health', getHealth)
 
-router.get('/api/sports', getSports)
+router.get('/api/games', getGamesAllRouter)
 
-router.get('/api/team/:nameTeam', getTeamScoresLive)
+router.get('/api/games/:nameTeam', getTeamsGamesRouter)
 
 export default router
