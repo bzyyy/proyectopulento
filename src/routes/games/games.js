@@ -1,9 +1,14 @@
-import {getGamesAll, getTeamsGames} from "../../actions/games/Games"
+import {getGamesAll, getTeamsGames, getMostRecentGames} from "../../actions/games/Games"
 
 
 //testing: obteniendo todos los nombres
 export async function getGamesAllRouter(ctx) {
     ctx.body = await getGamesAll()
+    return ctx
+}
+
+export async function getMostRecentGamesRouter(ctx){
+    ctx.body = await getMostRecentGames()
     return ctx
 }
 
