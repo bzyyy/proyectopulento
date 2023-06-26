@@ -48,10 +48,12 @@ export async function getPlayerByName(name){
     return players
 }
 
-//Funcion la cual en base al nombre de un jugador, buscara las estadisticas suyas de los ultimos dias juegos en los que participo.
-export async function getPlayerStatsByGames(player, n_games = 10){
+//Funcion la cual en base al nombre de un jugador, buscara las estadisticas suyas de los ultimos diez juegos en los que participo.
+export async function getPlayerStatsByGames(player, n_games=10){
     let player_temp = await getPlayerByName(player)
     //console.log(player_temp.data[0].id)
+    //Por default se retornara las stats del primer jugador el que mejor calce el "nombre" entregado al request
+    // mejor caso escenario, se entrega nombre y apellido, y no hay otro igual
     let stats = await getPlayerRecentStats(player_temp.data[0].id, n_games)
     if(stats.meta.next_page != null){
         stats = await getPlayerRecentStatsByPage(player_temp.data[0].id, n_games, stats.meta.total_pages)

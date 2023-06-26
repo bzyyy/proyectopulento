@@ -1,18 +1,39 @@
 import {getPlayerByName, getPlayerStatsByGames, getTest} from "../../actions/player/player"
 
 export async function getPlayerByNameRouter(ctx){
-    ctx.body = await getPlayerByName(ctx.body)
+    console.log(ctx.params)
+    if(ctx.params.players == undefined){
+        ctx.status = 400
+        ctx.body = {message: 'Player undefined, try again.'}
+        return ctx
+    }
+    ctx.body = await getPlayerByName(ctx.params.players)
+    if(ctx.body == -1){
+        ctx.status = 400
+        ctx.body = {message: 'Player not found, try again.'}
+        return ctx
+    }
     return ctx
 }
 
 export async function getPlayerStatsByGamesRouter(ctx){
-    if(ctx.params.player === undefined){
+    console.log(ctx.params)
+    console.log(ctx.params.player)
+    console.log(ctx.params.numbergames)
+    if(ctx.params.player === undefined || ctx.params.player === ':player'){
         ctx.status = 400
-        ctx.body = {message: 'Value undefined, try again.'}
+        ctx.body = {message: 'Value for player undefined, try again.'}
         return ctx
     }
-    let stats = await getPlayerStatsByGames(ctx.params.player)
-    //let stats = await  getTest(ctx.params.player)
-    ctx.body = stats
-    return ctx
+    if(ctx.params.numbergames === undefined || ctx.params.numbergames === ':numbergames' ){
+        let stats = await getPlayerStatsByGames(ctx.params.player)
+        ctx.body = stats
+        return ctx
+    }   
+    else{
+
+        let stats = await getPlayerStatsByGames(ctx.params.player, ctx.params.numbergames)
+        ctx.body = stats
+        return ctx
+    }
 }

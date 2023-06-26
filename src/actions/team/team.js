@@ -16,7 +16,11 @@ async function getAllTeamsNBA(){
 
 //Get de todos los jugadores, para luego filtrarlos por el equipo que se busca.
 async function getAllPlayers(){
-    const players = await axios.get('https://balldontlie.io/api/v1/players?per_page=100')
+    const players = await axios.get('https://balldontlie.io/api/v1/players?per_page=100',{
+        params:{
+            seasons : '2023'
+        }
+    })
     return (players.data)
 }
 
