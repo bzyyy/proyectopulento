@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 //import getHealth from './health/health'
-import { getGamesAllRouter,  getTeamsGamesRouter, getMostRecentGamesRouter } from './games/Games'
+import { getGamesAllRouter,  getTeamsGamesRouter, getMostRecentGamesRouter } from './games/games'
 import {getPlayerByNameRouter, getPlayerStatsByGamesRouter} from './player/player'
 import { getTeamsPlayersRouter } from './team/team'
 import { getAllUsersRouter } from './user/user'
