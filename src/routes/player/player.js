@@ -2,12 +2,12 @@ import {getPlayerByName, getPlayerStatsByGames, getTest} from "../../actions/pla
 
 export async function getPlayerByNameRouter(ctx){
     console.log(ctx.params)
-    if(ctx.params.players == undefined){
+    if(ctx.params.name == undefined){
         ctx.status = 400
         ctx.body = {message: 'Player undefined, try again.'}
         return ctx
     }
-    ctx.body = await getPlayerByName(ctx.params.players)
+    ctx.body = await getPlayerByName(ctx.params.name)
     if(ctx.body == -1){
         ctx.status = 400
         ctx.body = {message: 'Player not found, try again.'}
