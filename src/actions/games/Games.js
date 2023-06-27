@@ -22,7 +22,7 @@ const axios = require('axios')
 async function getGamesAxios() {
         const games = await axios.get('https://balldontlie.io/api/v1/games?',{
             params : {
-                per_page : 100,
+                per_page : 12, //Si se cambia este numero, asegurarse de cambiar el de getGamesByPage, si no error, y viceversa.
             }
         })
         return (games.data)
@@ -31,7 +31,7 @@ async function getGamesAxios() {
 async function getGamesByPage(num_page){
     const games = await axios.get('https://balldontlie.io/api/v1/games?',{
             params : {
-                per_page : 100,
+                per_page : 12,
                 page : num_page
             }
         })
@@ -49,16 +49,24 @@ export async function getGamesAll(){
     return games
 }
 
-export async function getMostRecentGames(){
+export async function getMostRecentGames(num_page = 0){
     let games = await getGamesAxios()
-    //Se asegura de acceder a la ultima pagina de la data para poder acceder a los juegos mas recientes.
-    if(games.meta.next_page != null){
-        games = await getGamesByPage(games.meta.total_pages)
+    //
+    if (num_page == 0){
+        //Se asegura de acceder a la ultima pagina de la data para poder acceder a los juegos mas recientes.
+        if(games.meta.next_page != null){
+            games = await getGamesByPage(games.meta.total_pages)
+        }
+    }
+    else{
+        if(games.meta.next_page != null){
+            games = await getGamesByPage(games.meta.total_pages - (num_page -1))
+        }
     } //Una vez en la pagina se asegura de que los juegos este ordenados de los mas recientes a los mas viejos.
     let newest_games = games.data.sort((a,b) =>{
         return new Date(b.date).getTime() - new Date(a.date).getTime()
     })
-    return newest_games
+    return {data :newest_games, meta: games.meta}
 }
 
 //Funcion para obtener los juegos de un equipo en particular, vienen los mas recientes primero por default.

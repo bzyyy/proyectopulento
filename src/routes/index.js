@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 //import getHealth from './health/health'
 import { getGamesAllRouter,  getTeamsGamesRouter, getMostRecentGamesRouter } from './games/games'
-import {getPlayerByNameRouter, getPlayerStatsByGamesRouter} from './player/player'
+import {getPlayerByNameRouter, getPlayerRecentStatsRouter, getPlayerStatsByGamesRouter} from './player/player'
 import { getTeamsPlayersRouter } from './team/team'
 import { getAllUsersRouter } from './user/user'
 
@@ -13,13 +13,13 @@ const router = new Router()
 //Games
 router.get('/api/games', getGamesAllRouter)
 
-router.get('/api/recentgames', getMostRecentGamesRouter)
+router.get('/api/games/recent', getMostRecentGamesRouter)
 
 router.get('/api/games/:nameTeam', getTeamsGamesRouter)
 
 
 //Player
-router.get('/api/:player/stats/:numbergames', getPlayerStatsByGamesRouter)
+router.get('/api/players/:player/stats', getPlayerRecentStatsRouter)
 
 router.get('/api/players/:name', getPlayerByNameRouter)
 

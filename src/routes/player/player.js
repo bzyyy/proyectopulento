@@ -1,4 +1,4 @@
-import {getPlayerByName, getPlayerStatsByGames, getTest} from "../../actions/player/player"
+import {getPlayerByName, getPlayerRecentStats, getPlayerStatsByGames, getTest} from "../../actions/player/player"
 
 export async function getPlayerByNameRouter(ctx){
     console.log(ctx.params)
@@ -16,7 +16,26 @@ export async function getPlayerByNameRouter(ctx){
     return ctx
 }
 
-export async function getPlayerStatsByGamesRouter(ctx){
+export async function getPlayerRecentStatsRouter(ctx){
+    console.log(ctx.params)
+    if(ctx.params.player === undefined || ctx.params.player === ':player'){
+        ctx.status = 400
+        ctx.body = {message: 'Value for player undefined, try again.'}
+        return ctx
+    }
+    if(ctx.query.numPage === undefined || ctx.query.numPage === ':numPage' ){
+        let stats = await getPlayerRecentStats(ctx.params.player)
+        ctx.body = stats
+        return ctx
+    }   
+    else{
+        let stats = await getPlayerRecentStats(ctx.params.player, ctx.query.numPage)
+        ctx.body = stats
+        return ctx
+    }
+}
+
+export async function getPlayerStatsByGamesRouter_notused(ctx){
     console.log(ctx.params)
     console.log(ctx.params.player)
     console.log(ctx.params.numbergames)
