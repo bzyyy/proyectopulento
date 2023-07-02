@@ -18,7 +18,7 @@ router.get('/api/games/:nameTeam', getTeamsGamesRouter)
 
 
 //Player
-router.get('/api/players/:player/stats', getPlayerRecentStatsRouter)
+router.get('/api/players/:player/stats/:numbergames', getPlayerRecentStatsRouter)
 
 router.get('/api/players/:name', getPlayerByNameRouter)
 
