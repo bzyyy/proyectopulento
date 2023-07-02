@@ -4,3 +4,13 @@ services:
         build: .
         ports: 
             - 3000:3000
+        depends_on:
+            - mongo
+
+    mongo:
+        container_name: bd_proyecto
+        image: mongo:latest
+        ports: 
+            - 27017:27017
+        volumes: 
+            - ../mongo_data:/data/db
