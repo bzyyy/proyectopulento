@@ -2,22 +2,6 @@ import { defaultMaxListeners } from 'koa'
 
 const axios = require('axios')
 
-//// An api key is emailed to you when you sign up to a plan
-//// Get a free API key at https://api.the-odds-api.com/
-//const apiKey = '465789ee51e68d5445869e397a411d62'
-//const sportKey = 'basketball_nba' // use the sport_key from the /sports endpoint below, or use 'upcoming' to see the next 8 games across all sports
-//const regions = 'us' // uk | us | eu | au. Multiple can be specified if comma delimited
-//const markets = 'h2h' // h2h | spreads | totals. Multiple can be specified if comma delimited
-//const oddsFormat = 'decimal' // decimal | american
-//const dateFormat = 'iso' // iso | unix
-//const daysFrom = 3
-///*
-//    First get a list of in-season sports
-//        the sport 'key' from the response can be used to get odds in the next request
-//
-//*/
-
-
 //Axios Requests to outside API
 async function getGamesAxios() {
         const games = await axios.get('https://balldontlie.io/api/v1/games?',{
@@ -49,10 +33,10 @@ export async function getGamesAll(){
     return games
 }
 
-export async function getMostRecentGames(num_page = 0){
+export async function getMostRecentGames(num_page = 1){
     let games = await getGamesAxios()
     //
-    if (num_page == 0){
+    if (num_page == 1){
         //Se asegura de acceder a la ultima pagina de la data para poder acceder a los juegos mas recientes.
         if(games.meta.next_page != null){
             games = await getGamesByPage(games.meta.total_pages)

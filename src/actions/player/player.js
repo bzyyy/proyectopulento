@@ -1,6 +1,7 @@
 import { defaultMaxListeners } from 'koa'
 import { addSyntheticLeadingComment } from 'typescript'
 
+
 const axios = require('axios')
 
 
@@ -36,6 +37,17 @@ async function getPlayerRecentStatsByPageAxios(id_player,  number_page) {
     return (stats.data)
 }
 
+async function getPlayerStatsAvgBySeasonAxios(id_player, season_number){
+    const stats = await axios.get('https://balldontlie.io/api/v1/season_averages?',{
+        params : {
+             season : season_number,
+             player_ids : [id_player]
+        }
+    })
+    return (stats.data)
+}
+
+
 
 //Request for our api
 
@@ -43,7 +55,7 @@ export async function getPlayerByName(name){
     let players = await getPlayerByNameAxios(name)
     //Una vez en la pagina se asegura de que los juegos este ordenados de los mas recientes a los mas viejos.
     if (players.data.length == 0){
-        return -1 //Retorna -1 para indicar que no se encontro jguadores con el ese first o last name.
+        return -1 //Retorna -1 para indicar que no se encontro jugadores con el first o last name dado.
     }
     return players
 }
@@ -71,6 +83,16 @@ export async function getPlayerRecentStats(player, numPage=0){
     return {data: newest_stats, meta: stats.meta}
 }
 
+
+export async function getPlayerStatsAvgBySeason(player, season=2022){
+    let player_temp = await getPlayerByName(player) //To make sure player is in external API and to obtain player ID
+    let stats = await getPlayerStatsAvgBySeasonAxios(player_temp.data[0].id, season)
+    return stats
+}
+
+
+
+
 export async function getTest(player_name){
     let players = await getPlayerByNameAxios(player_name)
     return players
@@ -94,5 +116,4 @@ export async function getPlayerStatsByGames_NOT_USED(player, n_games=10){
     })
     return stats
 }
-
 

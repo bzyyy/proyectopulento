@@ -1,4 +1,4 @@
-import {getPlayerByName, getPlayerRecentStats, getPlayerStatsByGames, getTest} from "../../actions/player/player"
+import {getPlayerByName, getPlayerRecentStats, getPlayerStatsByGames, getPlayerStatsAvgBySeason} from "../../actions/player/player"
 
 export async function getPlayerByNameRouter(ctx){
     console.log(ctx.params)
@@ -53,6 +53,27 @@ export async function getPlayerStatsByGamesRouter_notused(ctx){
 
         let stats = await getPlayerStatsByGames(ctx.params.player, ctx.params.numbergames)
         ctx.body = stats
+        return ctx
+    }
+}
+
+export async function getPlayerStatsAvgBySeasonRouter(ctx){
+    //console.log(ctx.params.player)
+    //console.log(ctx.query.season)
+
+    if(ctx.params.player === undefined || ctx.params.player === ':player'){
+        ctx.status = 400
+        ctx.body = {message: 'Value for player undefined, try again.'}
+        return ctx
+    }
+    if(ctx.request.query.season === undefined || ctx.request.query.season === ':season' ){
+        ctx.stats = 400
+        ctx.body = {message: 'Value for season undefined, try again.'}
+        return ctx
+    }   
+    else{
+        let stats_average = await getPlayerStatsAvgBySeason(ctx.params.player, ctx.query.season)
+        ctx.body = stats_average
         return ctx
     }
 }

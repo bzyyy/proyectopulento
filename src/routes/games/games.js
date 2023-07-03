@@ -8,7 +8,7 @@ export async function getGamesAllRouter(ctx) {
 }
 
 export async function getMostRecentGamesRouter(ctx){
-    if(ctx.query.numPage == 0 || ctx.query.numPage == undefined){
+    if(ctx.query.numPage == 1 || ctx.query.numPage == undefined){
         ctx.body = await getMostRecentGames()
     }else{
         ctx.body =await getMostRecentGames(ctx.query.numPage)

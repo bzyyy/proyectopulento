@@ -1,4 +1,5 @@
 import User from "../../model/UserModel"
+import { getPlayerByName } from "../player/player"
 
 const axios = require('axios')
 
@@ -52,6 +53,21 @@ export async function addUser(userData){
     await User.create(user)
 }
 
+export async function eraseUser(userData){
+    const user = await User.find({_id: userData._id})
+    //console.log(user.length)
+    if (user.length != 0){
+        if(user[0].password == userData.password ){
+            await User.deleteOne({_id: user[0]._id})
+            return ({message: "User was deleted successfully !",
+                    deletedUser: user})
+        }
+    }
+    return -1 //In case no user was found.
+}
+
+//Favorites players
+
 export async function findFavorites(userData){
     let answer = await User.find({_id: userData.token})
     answer = answer[0].favoritePlayers
@@ -60,10 +76,40 @@ export async function findFavorites(userData){
 
 export async function addFavPlayer(input){
     const player = {name: input.playerName}
+    const player_exists = await getPlayerByName(player.name)
+    console.log(player_exists)
+    if(player_exists != -1){
+        const user = await User.findOne({_id: input.token  })
+        //console.log(user)
+        //if( user.favoritePlayers.length == 1){
+        //    index = user.favoritePlayers.indexOf("none")
+        //    user.favoritePlayers.splice(index)
+        //}
+        //console.log(player_exists.data[0].first_name)
+        //console.log(player_exists.data[0].last_name)
+        let firstname = player_exists.data[0].first_name
+        let lastname = player_exists.data[0].last_name
+        user.favoritePlayers.push(firstname+' '+lastname)
+        await user.save()
+        return 1 //Succesful 
+    }
+    return -1
+}
+
+export async function delFavPlayer(input){
+    const player = {name: input.favplayer}
     const user = await User.findOne({_id: input.token})
-    //console.log(user)
-    user.favoritePlayers.push(player.name)
-    await user.save()
-    return 1 //Succesful
+
+    if (user.favoritePlayers.length != 0){
+            let index = user.favoritePlayers.indexOf(player.name)
+            if( index != -1){
+                user.favoritePlayers.splice(index, 1) //Makes sure to only remove desired player from list
+                await user.save()
+                return ({message: "Player was removed from favorites...",
+                        deletedPlayer: player})
+            }
+    }
+
+    return -1 //No players in favorites at all
 }
 
