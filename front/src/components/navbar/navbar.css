@@ -1,0 +1,40 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: #1E1E1E;
+}
+
+.navbar.dropdown-active {
+  overflow: hidden;
+}
+
+.navbar-white {
+  height: 4px;
+  background-color: white;
+  transition: height 0.3s ease;
+}
+
+.navbar-white.active {
+  height: 0;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.dropdown-open #dropdown {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.dropdown-open #dropdown {
+  max-height: 100vh;
+  overflow-y: auto;
+  margin-left: 10px;
+}
+.dropdown-list {
+  width: 100%; 
+}

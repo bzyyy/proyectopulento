@@ -1,0 +1,16 @@
+.container{
+  width: 600px;
+  margin: 0 auto;
+  background-color: #eeee;
+  padding: 0 20px 20px 20px;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: flex-start;
+
+}
+.blocks{
+    border: 3px solid black;
+    padding: 0 10px 20px 20px ;
+    padding-bottom: 10px;
+}
