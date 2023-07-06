@@ -13,4 +13,4 @@ Para levantar la parte del front, se deben correr los siguientes comandos dentro
 - npm run dev\
   
 Se agregaron el resto de stats disponibles por season.
-![image](https://github.com/bzyyy/proyectopulento/assets/128430862/37232173-75b7-40c3-aa6d-c14a6fab6482)
+![image](https://github.com/bzyyy/proyectopulento/assets/128430862/95f79ab6-707b-401b-b8fc-d4ca5ab36d1d)
