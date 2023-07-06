@@ -10,7 +10,7 @@ Pasos para correr aplicación:
 
 Para levantar la parte del front, se deben correr los siguientes comandos dentro de la carpeta de front:
 - npm install
-- npm run dev\
+- npm run dev
   
 Se agregaron el resto de stats disponibles por season.
 ![image](https://github.com/bzyyy/proyectopulento/assets/128430862/95f79ab6-707b-401b-b8fc-d4ca5ab36d1d)
